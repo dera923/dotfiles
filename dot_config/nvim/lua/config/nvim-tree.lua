@@ -1,4 +1,4 @@
--- config/nvim-tree.lua
+-- nvim-tree.lua
 local M = {}
 
 function M.setup()

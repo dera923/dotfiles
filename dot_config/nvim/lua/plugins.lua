@@ -49,7 +49,7 @@ return require('packer').startup(function(use)
   use {
     'neovim/nvim-lspconfig',
     config = function()
-      require('lsp-config')
+      require('config.lsp-config')
     end
   }
   use {
@@ -203,11 +203,6 @@ return require('packer').startup(function(use)
   
   use 'nvim-treesitter/nvim-treesitter-textobjects'  -- テキストオブジェクト機能のため
 
-  -- ~/.config/nvim/lua/plugins.luaに追加
-use {
-  'kyazdani42/nvim-tree.lua',
-  requires = 'kyazdani42/nvim-web-devicons'
-}
 
 -- fzf連携
 use {
@@ -219,25 +214,8 @@ use 'junegunn/fzf.vim'
 -- telescope-fzf-native.nvim（既存の設定を更新）
 use {
   'nvim-telescope/telescope-fzf-native.nvim',
-  run = 'make',
-  config = function()
-    require('telescope').load_extension('fzf')
-  end
+  run = 'make'
 }
-
--- ~/.config/nvim/lua/config/nvim-tree.luaとして保存
-require('nvim-tree').setup({
-  sort_by = "case_sensitive",
-  view = {
-    width = 30,
-  },
-  renderer = {
-    group_empty = true,
-  },
-})
-
--- キーマップの追加（~/.config/nvim/lua/keymaps.lua）
-vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
   -- 自動的にパッケージがインストールされたらNeovimを同期
   if packer_bootstrap then

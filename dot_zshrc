@@ -65,6 +65,18 @@ if [ -d "$HOME/.tfenv/bin" ]; then
   export PATH="$HOME/.tfenv/bin:$PATH"
 fi
 
+# Tailscale エイリアス
+alias ts='tailscale'
+alias tss='tailscale status'
+alias tsu='tailscale up'
+alias tsd='tailscale down'
+
+# Mosh 接続
+mosh_connect() {
+  mosh --ssh="ssh -p ${2:-22}" "$1"
+}
+alias mc='mosh_connect'
+
 # fzf × ripgrepでファイル検索
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -92,3 +104,4 @@ ff() {
 psg() {
   ps aux | grep "$1" | grep -v grep
 }
+# テスト用コメント
