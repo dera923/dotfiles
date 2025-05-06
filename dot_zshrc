@@ -1,0 +1,94 @@
+# 履歴の設定
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+setopt sharehistory
+setopt incappendhistory
+
+# 補完の設定 
+autoload -Uz compinit
+compinit
+
+# プロンプトの設定
+autoload -Uz promptinit
+promptinit
+prompt adam1
+
+# エイリアス
+alias ls='ls --color=auto'
+alias ll='ls -la'
+alias vim='nvim'
+# 便利なエイリアス
+alias update='sudo apt update && sudo apt upgrade'
+alias install='sudo apt install'
+alias remove='sudo apt remove'
+alias c='clear'
+alias h='history'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+# zoxide の設定（cdコマンド強化）
+eval "$(zoxide init zsh)"
+
+# fzf の設定
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# batをcatの代わりに使用
+alias cat="bat --style=plain"
+
+# ezaをlsの代わりに使用
+alias ls="eza --icons"
+alias ll="eza -l --icons"
+alias la="eza -la --icons"
+alias lt="eza --tree --icons"
+
+# Docker/docker-compose ショートカット
+alias d='docker'
+alias dc='docker-compose'
+alias dps='docker ps'
+alias dex='docker exec -it'
+alias dlogs='docker logs -f'
+
+# Docker クリーンアップ
+alias dprune='docker system prune -af --volumes'
+
+# Terraform エイリアス
+alias tf='terraform'
+alias tfi='terraform init'
+alias tfp='terraform plan'
+alias tfa='terraform apply'
+alias tfd='terraform destroy'
+
+# tfenv（Terraformバージョン管理）
+if [ -d "$HOME/.tfenv/bin" ]; then
+  export PATH="$HOME/.tfenv/bin:$PATH"
+fi
+
+# fzf × ripgrepでファイル検索
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# .zshrcファイルで
+plugins=(
+  git
+  docker
+  npm
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+
+# ディレクトリ作成と移動を同時に行う関数
+mkcd() {
+  mkdir -p "$1" && cd "$1"
+}
+
+# ファイル検索関数
+ff() {
+  find . -type f -name "*$1*"
+}
+
+# プロセス検索関数
+psg() {
+  ps aux | grep "$1" | grep -v grep
+}
