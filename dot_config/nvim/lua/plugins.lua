@@ -32,7 +32,7 @@ return require('packer').startup(function(use)
       require('telescope').setup {}
     end
   }
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
+  
 
   -- ファイルツリー表示
   use {
@@ -211,11 +211,6 @@ use {
 }
 use 'junegunn/fzf.vim'
 
--- telescope-fzf-native.nvim（既存の設定を更新）
-use {
-  'nvim-telescope/telescope-fzf-native.nvim',
-  run = 'make'
-}
 
   -- 自動的にパッケージがインストールされたらNeovimを同期
   if packer_bootstrap then
