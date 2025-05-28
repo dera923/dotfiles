@@ -1,21 +1,20 @@
-local null_ls = require("null-ls")
-
--- null-lsソースの設定
-local sources = {
-  -- フォーマッター
-  null_ls.builtins.formatting.prettier.with({
-    condition = function()
-      return vim.fn.executable("prettier") == 1
-    end,
-  }),
-  null_ls.builtins.formatting.stylua.with({
-    condition = function()
-      return vim.fn.executable("stylua") == 1
-    end,
-  }),
-  -- 必要に応じて他のソースを追加
-}
+local null_ls = require('null-ls')
 
 null_ls.setup({
-  sources = sources,
-})
+  sources = {
+    -- Python
+    null_ls.builtins.formatting.black,
+    null_ls.builtins.formatting.isort,
+    null_ls.builtins.diagnostics.flake8,
+    
+    -- Lua
+    null_ls.builtins.formatting.stylua,
+    
+    -- JavaScript/TypeScript
+    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.diagnostics.eslint,
+    
+    -- JSON
+    null_ls.builtins.formatting.jq,
+  },
+}) 
